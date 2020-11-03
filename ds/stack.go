@@ -2,31 +2,23 @@ package ds
 
 import "errors"
 
-type Stack struct {
-	slice []string
-}
-
-func NewStack() *Stack {
-	slice := make([]string, 0)
-	stack := &Stack{
-		slice: slice,
-	}
-	return stack
-}
+type Stack []string
 
 func (s *Stack) Push(val string) {
-	s.slice = append(s.slice, val)
+	*s = append(*s, val)
 }
 
 func (s *Stack) Pop() (string, error) {
-	if len(s.slice) == 0 {
+	p := *s
+	if len(p) == 0 {
 		return "", errors.New("empty stack")
 	}
-	r := s.slice[len(s.slice)-1]
-	s.slice = s.slice[0 : len(s.slice)-1]
+	r := p[len(p)-1]
+	p = p[0 : len(p)-1]
+	*s = p
 	return r, nil
 }
 
 func (s *Stack) Clear() {
-	s.slice = make([]string, 0)
+	*s = Stack{}
 }

@@ -6,7 +6,7 @@ import (
 )
 
 func TestStack(t *testing.T) {
-	stack := NewStack()
+	stack := &Stack{}
 	stack.Push("test0")
 	stack.Push("test1")
 	stack.Push("test2")
