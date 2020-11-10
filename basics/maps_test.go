@@ -18,4 +18,15 @@ func TestMaps(t *testing.T) {
 	assert.True(t, ok)
 	assert.Equal(t, "ajanthan", name)
 	assert.Equal(t, 1, len(hashTable))
+	nameMap := map[string][]string{
+		"ajanthan": {"aja", "ajan"},
+		"bala":     {"aja", "ajan"},
+	}
+	assert.Equal(t, 2, len(nameMap))
+
+	for key, names := range nameMap {
+		t.Log(key, "=>", names)
+	}
+	delete(nameMap, "bala")
+	assert.Equal(t, 1, len(nameMap))
 }
