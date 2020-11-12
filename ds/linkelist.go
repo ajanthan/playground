@@ -6,56 +6,56 @@ import (
 )
 
 type Node struct {
-	next *Node
-	data int
+	Next *Node
+	Data int
 }
 type LinkedList struct {
-	head *Node
+	Head *Node
 }
 
 func (l *LinkedList) AddNode(data int) {
-	newNode := &Node{data: data}
-	if l.head == nil {
-		l.head = newNode
+	newNode := &Node{Data: data}
+	if l.Head == nil {
+		l.Head = newNode
 	} else {
-		newNode.next = l.head
-		l.head = newNode
+		newNode.Next = l.Head
+		l.Head = newNode
 	}
 }
 func (l *LinkedList) DeleteNode(data int) {
-	if l.head != nil {
-		if l.head.data == data {
-			l.head = l.head.next
+	if l.Head != nil {
+		if l.Head.Data == data {
+			l.Head = l.Head.Next
 			return
 		}
-		node := l.head
-		for node.next != nil {
-			if node.next.data == data {
-				node.next = node.next.next
+		node := l.Head
+		for node.Next != nil {
+			if node.Next.Data == data {
+				node.Next = node.Next.Next
 			} else {
-				node = node.next
+				node = node.Next
 			}
 		}
 	}
 }
 func (l *LinkedList) String() string {
 	//var builder strings.Builder
-	//builder.WriteString("head[" + strconv.Itoa(l.head.data) + "]")
-	//node := l.head.next
+	//builder.WriteString("Head[" + strconv.Itoa(l.Head.Data) + "]")
+	//node := l.Head.Next
 	//for node != nil {
-	//	builder.WriteString("->[" + strconv.Itoa(node.data) + "]")
-	//	node = node.next
+	//	builder.WriteString("->[" + strconv.Itoa(node.Data) + "]")
+	//	node = node.Next
 	//}
 	//return builder.String()
-	return String(l.head)
+	return String(l.Head)
 }
 func String(node *Node) string {
 	var builder strings.Builder
-	if node.next == nil {
-		builder.WriteString("[" + strconv.Itoa(node.data) + "]")
+	if node.Next == nil {
+		builder.WriteString("[" + strconv.Itoa(node.Data) + "]")
 		return builder.String()
 	} else {
-		builder.WriteString("[" + strconv.Itoa(node.data) + "]->")
-		return builder.String() + String(node.next)
+		builder.WriteString("[" + strconv.Itoa(node.Data) + "]->")
+		return builder.String() + String(node.Next)
 	}
 }
