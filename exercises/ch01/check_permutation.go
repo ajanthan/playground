@@ -1,4 +1,4 @@
-package exercises
+package ch01
 
 func CheckPermutation(s1, s2 string) bool {
 	if s1 == s2 {

@@ -1,4 +1,4 @@
-package exercises
+package ch01
 
 func ZeroMatrix(mn [][]int) [][]int {
 	newMatrix := make([][]int, len(mn))

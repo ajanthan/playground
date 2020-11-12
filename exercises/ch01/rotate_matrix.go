@@ -1,4 +1,4 @@
-package exercises
+package ch01
 
 func RotateImage90(image [][]int) [][]int {
 	newImage := make([][]int, len(image))

@@ -1,4 +1,4 @@
-package exercises
+package ch01
 
 func IsUnique(s string) bool {
 	ht := make(map[byte]string)
