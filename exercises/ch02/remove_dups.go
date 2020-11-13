@@ -12,17 +12,19 @@ func RemoveDups(l ds.LinkedList) error {
 		return errors.New("Empty")
 	}
 	ht[l.Head.Data] = l.Head.Data
-	cNode := l.Head.Next //n[1]->[2]->[3]->[2]->[1]
-	pNode := l.Head
-	for cNode != nil {
-		_, ok := ht[cNode.Data]
+	cNode := l.Head //n[1]->[2]->[3]->[2]->[1]
+	//	pNode := l.Head
+	for cNode.Next != nil {
+		_, ok := ht[cNode.Next.Data]
 		if ok {
-			pNode.Next = cNode.Next
+			//pNode.Next = cNode.Next
+			cNode.Next = cNode.Next.Next
 		} else {
-			ht[cNode.Data] = cNode.Data
-			pNode = cNode
+			ht[cNode.Next.Data] = cNode.Next.Data
+			//pNode = cNode
+			cNode = cNode.Next
 		}
-		cNode = cNode.Next
+
 	}
 	return nil
 }
