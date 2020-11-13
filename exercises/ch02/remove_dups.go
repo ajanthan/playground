@@ -26,3 +26,22 @@ func RemoveDups(l ds.LinkedList) error {
 	}
 	return nil
 }
+
+func RemoveDupsWith2Pointer(l ds.LinkedList) error {
+	if l.Head == nil {
+		return errors.New("Empty")
+	}
+	cNode := l.Head
+	for cNode != nil {
+		runner := cNode
+		for runner.Next != nil {
+			if runner.Next.Data == cNode.Data {
+				runner.Next = runner.Next.Next
+			} else {
+				runner = runner.Next
+			}
+		}
+		cNode = cNode.Next
+	}
+	return nil
+}
