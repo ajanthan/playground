@@ -5,7 +5,7 @@ import (
 	"playground/ds"
 )
 
-func DeleteMiddle(l ds.LinkedList) error {
+func GetMiddle(l ds.LinkedList) (*ds.Node, error) {
 	//l=[1]->[2]->[3]
 	count := 0
 	p1 := l.Head
@@ -15,7 +15,7 @@ func DeleteMiddle(l ds.LinkedList) error {
 		p1 = p1.Next //[2] [3]  nil
 	}
 	if count < 3 {
-		return errors.New("invalid input")
+		return nil, errors.New("invalid input")
 	}
 	middle := 0
 	if count%2 == 0 {
@@ -25,10 +25,18 @@ func DeleteMiddle(l ds.LinkedList) error {
 	}
 	for i := 2; i <= count; i++ { //count=3
 		if i == middle {
-			p2.Next = p2.Next.Next
-			return nil
+			break
 		}
 		p2 = p2.Next
 	}
+	return p2.Next, nil
+}
+
+func DeleteMiddle(node *ds.Node) error {
+	if node.Next == nil {
+		return errors.New("not a middle node")
+	}
+	node.Data = node.Next.Data
+	node.Next = node.Next.Next
 	return nil
 }
