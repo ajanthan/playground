@@ -14,8 +14,8 @@ func Reverse(l ds.LinkedList) ds.LinkedList {
 	r := ds.LinkedList{}
 	cur := l.Head
 	var prev *ds.Node
-	for cur!=nil{
-		cur,prev,cur.Next=cur.Next,cur,prev
+	for cur != nil {
+		cur, prev, cur.Next = cur.Next, cur, prev
 	}
 	r.Head = prev
 	return r

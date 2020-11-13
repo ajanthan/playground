@@ -5,12 +5,10 @@ import (
 )
 
 //9.46
-
 func FindKthToLast(l *ds.Node, k int) *ds.Node {
 	//1->2->3 k=2
 	index := 0
 	return findKthToLast(l, k, &index)
-
 }
 func findKthToLast(l *ds.Node, k int, i *int) *ds.Node {
 	if l == nil {
@@ -22,7 +20,6 @@ func findKthToLast(l *ds.Node, k int, i *int) *ds.Node {
 		return l
 	}
 	return node
-
 }
 
 //func FindKthToFirst(l *ds.Node, k int) *ds.Node {
@@ -52,3 +49,15 @@ func findKthToLast(l *ds.Node, k int, i *int) *ds.Node {
 //	return node
 //
 //}
+
+func FindKthToLastIterative(l *ds.Node, k int) *ds.Node {
+	p1, p2 := l, l
+	for i := 1; i < k; i++ {
+		p1 = p1.Next
+	}
+	for p1.Next != nil {
+		p1 = p1.Next
+		p2 = p2.Next
+	}
+	return p2
+}
