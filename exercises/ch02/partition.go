@@ -5,28 +5,38 @@ import (
 )
 
 func Partition(l *ds.LinkedList, x int) {
-	var p1 *ds.Node
-	var p2 *ds.Node
-	var joint *ds.Node
+	var p1, p2, joint *ds.Node
 	node := l.Head
-
 	for node != nil {
+		next := node.Next
 		if node.Data < x {
-			new := &ds.Node{}
 			if p1 == nil {
-				joint = new
+				joint = node
 			}
-			new.Data = node.Data
-			new.Next = p1
-			p1 = new
+			node.Next = p1
+			p1 = node
 		} else {
-			new := &ds.Node{}
-			new.Data = node.Data
-			new.Next = p2
-			p2 = new
+			node.Next = p2
+			p2 = node
 		}
-		node = node.Next
+		node = next
 	}
 	joint.Next = p2
+	l.Head = p1
+}
+func PartitionClean(l *ds.LinkedList, x int) {
+	p1, p2, node := l.Head, l.Head, l.Head
+	for node != nil {
+		next := node.Next
+		if node.Data < x {
+			node.Next = p1
+			p1 = node
+		} else {
+			p2.Next = node
+			p2 = node
+		}
+		node = next
+	}
+	p2.Next = nil
 	l.Head = p1
 }

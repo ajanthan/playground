@@ -6,6 +6,18 @@ import (
 	"testing"
 )
 
+func TestPartitionClean(t *testing.T) {
+	l1 := ds.LinkedList{}
+	l1.AddNode(1)
+	l1.AddNode(2)
+	l1.AddNode(10)
+	l1.AddNode(5)
+	l1.AddNode(8)
+	l1.AddNode(5)
+	l1.AddNode(3)
+	PartitionClean(&l1, 5)
+	assert.Equal(t, "[1]->[2]->[3]->[5]->[8]->[5]->[10]", l1.String())
+}
 func TestPartition(t *testing.T) {
 	l1 := ds.LinkedList{}
 	l1.AddNode(1)
