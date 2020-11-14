@@ -1,0 +1,37 @@
+package ch02
+
+import "playground/ds"
+
+func SumList(l1, l2 ds.LinkedList) *ds.LinkedList {
+	var tail *ds.Node
+	var head *ds.Node
+	n1, n2 := l1.Head, l2.Head
+	i, j, c := 0, 0, 0
+	for n1 != nil || n2 != nil {
+		if n1 == nil {
+			i = 0
+		} else {
+			i = n1.Data
+			n1 = n1.Next
+		}
+		if n2 == nil {
+			j = 0
+		} else {
+			j = n2.Data
+			n2 = n2.Next
+		}
+		node := &ds.Node{}
+		node.Data = (i + j + c) % 10
+		if head == nil {
+			head = node
+			tail = node
+		} else {
+			tail.Next = node
+			tail = node
+		}
+		c = (i + j + c) / 10
+	}
+	return &ds.LinkedList{
+		Head: head,
+	}
+}
