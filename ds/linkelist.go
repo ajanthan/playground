@@ -59,3 +59,34 @@ func String(node *Node) string {
 		return builder.String() + String(node.Next)
 	}
 }
+
+func Size(n *Node) int {
+	if n == nil {
+		return 0
+	}
+	return 1 + Size(n.Next)
+}
+
+func Equal(n1, n2 *Node) bool {
+	if Size(n1) != Size(n2) {
+		return false
+	}
+	for n1.Next != nil {
+		if n1.Data != n2.Data {
+			return false
+		}
+		n1, n2 = n1.Next, n2.Next
+	}
+	return true
+}
+func Copy(n *Node) *Node {
+	if n == nil {
+		return nil
+	}
+	node := Copy(n.Next)
+	newNode := &Node{}
+	newNode.Data = n.Data
+	newNode.Next = node
+	return newNode
+
+}
