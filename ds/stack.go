@@ -10,7 +10,7 @@ func (s *Stack) Push(val string) {
 
 func (s *Stack) Pop() (string, error) {
 	p := *s
-	if len(p) == 0 {
+	if s.IsEmpty() {
 		return "", errors.New("empty stack")
 	}
 	r := p[len(p)-1]
@@ -21,4 +21,17 @@ func (s *Stack) Pop() (string, error) {
 
 func (s *Stack) Clear() {
 	*s = Stack{}
+}
+
+func (s *Stack) Peek() (string, error) {
+	p := *s
+	if s.IsEmpty() {
+		return "", errors.New("empty stack")
+	}
+	r := p[len(p)-1]
+	return r, nil
+}
+
+func (s *Stack) IsEmpty() bool {
+	return len(*s) == 0
 }
