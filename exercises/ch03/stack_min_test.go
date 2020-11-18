@@ -6,7 +6,7 @@ import (
 )
 
 func TestIntStack(t *testing.T) {
-	is := &IntStack{}
+	is := &MinIntStack{}
 	is.Push(3)
 	is.Push(2)
 	is.Push(4)

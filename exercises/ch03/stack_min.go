@@ -2,12 +2,12 @@ package ch03
 
 import "errors"
 
-type IntStack struct {
+type MinIntStack struct {
 	slice []int
 	min   []int
 }
 
-func (i *IntStack) Push(in int) {
+func (i *MinIntStack) Push(in int) {
 	if len(i.slice) == 0 {
 		i.min = append(i.min, in)
 	} else {
@@ -19,7 +19,7 @@ func (i *IntStack) Push(in int) {
 	i.slice = append(i.slice, in)
 }
 
-func (i *IntStack) Pop() (int, error) {
+func (i *MinIntStack) Pop() (int, error) {
 	if len(i.slice) == 0 {
 		return 0, errors.New("empty")
 	}
@@ -36,7 +36,7 @@ func (i *IntStack) Pop() (int, error) {
 	i.slice = append(ns, i.slice[:len(i.slice)-1]...)
 	return r, nil
 }
-func (i *IntStack) Min() (int, error) {
+func (i *MinIntStack) Min() (int, error) {
 	if len(i.slice) == 0 {
 		return 0, errors.New("empty")
 	}
