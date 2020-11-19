@@ -3,8 +3,8 @@ package graph
 type Node struct {
 	Data       interface{}
 	Neighbours []*Node
-	visited    bool
-	marked     bool
+	Visited    bool
+	Marked     bool
 }
 
 func DFSearch(n *Node, visit func(n *Node)) {
@@ -12,9 +12,9 @@ func DFSearch(n *Node, visit func(n *Node)) {
 		return
 	}
 	visit(n)
-	n.visited = true
+	n.Visited = true
 	for _, neighbour := range n.Neighbours {
-		if !neighbour.visited {
+		if !neighbour.Visited {
 			DFSearch(neighbour, visit)
 		}
 	}
@@ -25,15 +25,15 @@ func BFSearch(root *Node, visit func(n *Node)) {
 	if root == nil {
 		return
 	}
-	root.marked = true
+	root.Marked = true
 	neighbourQueue.Add(root)
 
 	for !neighbourQueue.IsEmpty() {
 		node, _ := neighbourQueue.Remove()
 		visit(node)
 		for _, neighbour := range node.Neighbours {
-			if !neighbour.marked {
-				neighbour.marked = true
+			if !neighbour.Marked {
+				neighbour.Marked = true
 				neighbourQueue.Add(neighbour)
 			}
 		}
