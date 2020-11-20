@@ -1,19 +1,21 @@
 package ch04
 
-import "playground/ds/graph"
+import (
+	"playground/ds/tree"
+)
 
-func MinHeightBST(in []int) *graph.Node {
-	//1,2
+func MinHeightBST(in []int) *tree.BTNode {
 	if len(in) == 1 {
-		return &graph.Node{Data: in[0]}
+		return &tree.BTNode{Data: in[0]}
 	} else if len(in) == 0 {
 		return nil
 	}
-	root := &graph.Node{}
+	root := &tree.BTNode{}
 	mid := len(in) / 2
 	root.Data = in[mid]
 	left := MinHeightBST(in[:mid])
+	root.Left = left
 	right := MinHeightBST(in[mid+1:])
-	root.Neighbours = append(root.Neighbours, left, right)
+	root.Right = right
 	return root
 }
