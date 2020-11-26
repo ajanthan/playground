@@ -17,12 +17,16 @@ func TestIsBST(t *testing.T) {
 			f: IsBSTV1,
 		},
 		{
-			d: "IsBSTV12",
+			d: "IsBSTV2",
 			f: IsBSTV2,
 		},
 		{
-			d: "IsBSTV13",
+			d: "IsBSTV3",
 			f: IsBSTV3,
+		},
+		{
+			d: "IsBSTV4",
+			f: IsBSTV4,
 		},
 	}
 	for i, c := range cases {

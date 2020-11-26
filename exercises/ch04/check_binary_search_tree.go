@@ -90,3 +90,16 @@ func IsBSTV3(root *tree.BTNode) bool {
 	isBST, _ := isBSTV3(root, math.MinInt64)
 	return isBST
 }
+
+func IsBSTV4(root *tree.BTNode) bool {
+	return isInRange(root, math.MaxInt64, math.MinInt64)
+}
+func isInRange(root *tree.BTNode, max, min int) bool {
+	if root == nil {
+		return true
+	}
+	if root.Data.(int) < min || root.Data.(int) > max {
+		return false
+	}
+	return isInRange(root.Left, root.Data.(int), min) && isInRange(root.Right, max, root.Data.(int))
+}
