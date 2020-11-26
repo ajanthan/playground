@@ -11,13 +11,18 @@ func TestIsBST(t *testing.T) {
 	cases := []struct {
 		d string
 		f func(root *tree.BTNode) bool
-	}{{
-		d: "IsBSTV1",
-		f: IsBSTV1,
-	},
+	}{
+		{
+			d: "IsBSTV1",
+			f: IsBSTV1,
+		},
 		{
 			d: "IsBSTV12",
 			f: IsBSTV2,
+		},
+		{
+			d: "IsBSTV13",
+			f: IsBSTV3,
 		},
 	}
 	for i, c := range cases {

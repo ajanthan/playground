@@ -1,6 +1,7 @@
 package ch04
 
 import (
+	"math"
 	"playground/ds/tree"
 	"sort"
 )
@@ -61,4 +62,31 @@ func getRoot(root *tree.BTNode, s []int) []int {
 func IsBSTV2(root *tree.BTNode) bool {
 	s := BSTtoSlice(root)
 	return sort.IntsAreSorted(s)
+}
+
+func isBSTV3(root *tree.BTNode, prevData int) (bool, int) {
+	if root.Left == nil || root.Right == nil {
+		if prevData == math.MinInt64 {
+			return true, root.Data.(int)
+		}
+		return root.Data.(int) > prevData, root.Data.(int)
+	}
+	isOrdered, data := isBSTV3(root.Left, prevData)
+	if !isOrdered {
+		return false, data
+	}
+	isOrdered = root.Data.(int) > data
+	prevData = root.Data.(int)
+	if !isOrdered {
+		return false, prevData
+	}
+	isOrdered, data = isBSTV3(root.Right, prevData)
+	if !isOrdered {
+		return false, data
+	}
+	return true, data
+}
+func IsBSTV3(root *tree.BTNode) bool {
+	isBST, _ := isBSTV3(root, math.MinInt64)
+	return isBST
 }
