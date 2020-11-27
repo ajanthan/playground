@@ -5,3 +5,9 @@ type BTNode struct {
 	Left  *BTNode
 	Right *BTNode
 }
+type BBTNode struct {
+	Data   interface{}
+	Left   *BBTNode
+	Right  *BBTNode
+	Parent *BBTNode
+}
