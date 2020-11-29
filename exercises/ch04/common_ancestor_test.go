@@ -2,6 +2,7 @@ package ch04
 
 import (
 	"github.com/stretchr/testify/assert"
+	"math"
 	"testing"
 )
 
@@ -15,4 +16,8 @@ func TestFindCommonAncestor(t *testing.T) {
 	assert.Equal(t, 2, i)
 	i = FindCommonAncestor(root, 5, 7)
 	assert.Equal(t, 6, i)
+	i = FindCommonAncestor(root, 5, 8)
+	assert.Equal(t, math.MinInt64, i)
+	i = FindCommonAncestor(root, 0, 7)
+	assert.Equal(t, math.MinInt64, i)
 }
