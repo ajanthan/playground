@@ -63,3 +63,31 @@ func TestCopy(t *testing.T) {
 	n2 := Copy(l1.Head)
 	assert.True(t, Equal(l1.Head, n2))
 }
+
+func TestLinkedList_AddAll(t *testing.T) {
+	//4,3,2,1
+	l1 := &LinkedList{}
+	l1.AddNode(1)
+	l1.AddNode(2)
+	l1.AddNode(3)
+	l1.AddNode(4)
+	//4,3,2,1
+	l2 := &LinkedList{}
+	l2.AddNode(1)
+	l2.AddNode(2)
+	l2.AddNode(3)
+	l2.AddNode(4)
+	//l1+l2
+	//4,3,2,1,4,3,2,1
+	l3 := &LinkedList{}
+	l3.AddNode(1)
+	l3.AddNode(2)
+	l3.AddNode(3)
+	l3.AddNode(4)
+	l3.AddNode(1)
+	l3.AddNode(2)
+	l3.AddNode(3)
+	l3.AddNode(4)
+	l1.AddAll(l2)
+	assert.True(t, Equal(l1.Head, l3.Head))
+}

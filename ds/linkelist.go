@@ -90,3 +90,18 @@ func Copy(n *Node) *Node {
 	return newNode
 
 }
+
+func (l *LinkedList) AddAll(another *LinkedList) {
+	tail := getTail(l.Head)
+	tail.Next = another.Head
+}
+
+func getTail(n *Node) *Node {
+	if n == nil {
+		return nil
+	}
+	if n.Next == nil {
+		return n
+	}
+	return getTail(n.Next)
+}
