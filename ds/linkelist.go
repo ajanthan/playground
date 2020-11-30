@@ -128,8 +128,9 @@ func RemoveLast(n *Node) *Node {
 		return nil
 	}
 	if n.Next.Next == nil {
+		r := n.Next
 		n.Next = nil
-		return n
+		return r
 	}
 	return RemoveLast(n.Next)
 }
