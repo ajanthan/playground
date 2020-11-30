@@ -8,7 +8,7 @@ func IsPalindromeV0(l ds.LinkedList) bool {
 	if l.Head == nil {
 		return false
 	}
-	n := ds.Copy(l.Head)
+	n := ds.Clone(l.Head)
 	l2 := Reverse(ds.LinkedList{Head: n})
 	return ds.Equal(l2.Head, l.Head)
 }

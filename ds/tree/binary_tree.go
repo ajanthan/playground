@@ -2,6 +2,7 @@ package tree
 
 type BTNode struct {
 	Data  interface{}
+	Found bool
 	Left  *BTNode
 	Right *BTNode
 }

@@ -60,7 +60,7 @@ func TestCopy(t *testing.T) {
 	l1.AddNode(2)
 	l1.AddNode(3)
 	l1.AddNode(4)
-	n2 := Copy(l1.Head)
+	n2 := Clone(l1.Head)
 	assert.True(t, Equal(l1.Head, n2))
 }
 
@@ -90,4 +90,31 @@ func TestLinkedList_AddAll(t *testing.T) {
 	l3.AddNode(4)
 	l1.AddAll(l2)
 	assert.True(t, Equal(l1.Head, l3.Head))
+}
+
+func TestLinkedList_RemoveFirst(t *testing.T) {
+	l1 := &LinkedList{}
+	l1.AddNode(1)
+	l1.AddNode(2)
+	l1.AddNode(3)
+	l1.AddNode(4)
+	//first=4
+	i := l1.RemoveFirst()
+	assert.Equal(t, 4, i)
+	assert.Equal(t, 3, l1.Head.Data)
+}
+func TestLinkedList_RemoveLast(t *testing.T) {
+	l1 := &LinkedList{}
+	l1.AddNode(1)
+	l1.AddNode(2)
+	l1.AddNode(3)
+	l1.AddNode(4)
+	//last=1
+	i := l1.RemoveLast()
+	assert.Equal(t, 1, i)
+	i = l1.RemoveLast()
+	assert.Equal(t, 2, i)
+	l1.AddLast(1)
+	i = l1.RemoveLast()
+	assert.Equal(t, 1, i)
 }

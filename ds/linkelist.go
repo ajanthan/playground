@@ -22,6 +22,19 @@ func (l *LinkedList) AddNode(data int) {
 		l.Head = newNode
 	}
 }
+
+func (l *LinkedList) AddLast(data int) {
+	tail := getTail(l.Head)
+	tail.Next = &Node{Data: data}
+}
+func (l *LinkedList) RemoveFirst() int {
+	r := l.Head.Data
+	l.Head = l.Head.Next
+	return r
+}
+func (l *LinkedList) RemoveLast() int {
+	return RemoveLast(l.Head).Data
+}
 func (l *LinkedList) DeleteNode(data int) {
 	if l.Head != nil {
 		if l.Head.Data == data {
@@ -79,11 +92,11 @@ func Equal(n1, n2 *Node) bool {
 	}
 	return true
 }
-func Copy(n *Node) *Node {
+func Clone(n *Node) *Node {
 	if n == nil {
 		return nil
 	}
-	node := Copy(n.Next)
+	node := Clone(n.Next)
 	newNode := &Node{}
 	newNode.Data = n.Data
 	newNode.Next = node
@@ -92,8 +105,12 @@ func Copy(n *Node) *Node {
 }
 
 func (l *LinkedList) AddAll(another *LinkedList) {
-	tail := getTail(l.Head)
-	tail.Next = another.Head
+	if l.Head == nil {
+		l.Head = another.Head
+	} else {
+		tail := getTail(l.Head)
+		tail.Next = another.Head
+	}
 }
 
 func getTail(n *Node) *Node {
@@ -104,4 +121,15 @@ func getTail(n *Node) *Node {
 		return n
 	}
 	return getTail(n.Next)
+}
+
+func RemoveLast(n *Node) *Node {
+	if n == nil {
+		return nil
+	}
+	if n.Next.Next == nil {
+		n.Next = nil
+		return n
+	}
+	return RemoveLast(n.Next)
 }
