@@ -3,6 +3,7 @@ package tree
 type BTNode struct {
 	Data  interface{}
 	Found bool
+	Size  int
 	Left  *BTNode
 	Right *BTNode
 }

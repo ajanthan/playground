@@ -1,7 +1,6 @@
 package ch04
 
 import (
-	"math"
 	"math/rand"
 	"playground/ds/tree"
 	"time"
@@ -14,7 +13,11 @@ type BST struct {
 
 func (b *BST) Insert(i int) {
 	b.Len++
-	insert(b.Root, i)
+	if b.Root == nil {
+		b.Root = &tree.BTNode{Data: i, Size: 1}
+	} else {
+		insert(b.Root, i)
+	}
 }
 func (b *BST) Find(i int) *tree.BTNode {
 	return find(b.Root, i)
@@ -62,41 +65,47 @@ func insert(root *tree.BTNode, i int) {
 	}
 	if i <= root.Data.(int) {
 		if root.Left == nil {
-			root.Left = &tree.BTNode{Data: i}
+			root.Left = &tree.BTNode{Data: i, Size: 1}
+			root.Size++
 			return
 		}
 		insert(root.Left, i)
+		root.Size++
 	}
 	if i > root.Data.(int) {
 		if root.Right == nil {
-			root.Right = &tree.BTNode{Data: i}
+			root.Right = &tree.BTNode{Data: i, Size: 1}
+			root.Size++
 			return
 		}
 		insert(root.Right, i)
+		root.Size++
 	}
 }
 
 func (b *BST) GetRandomNode() int {
 	seed := rand.NewSource(time.Now().UnixNano())
 	random := rand.New(seed)
-	r, _ := getKthNode(b.Root, random.Intn(b.Len))
-	return r
+	r := GetKthNode(b.Root, random.Intn(b.Root.Size))
+	return r.Data.(int)
 }
-func getKthNode(root *tree.BTNode, k int) (int, int) {
+func GetKthNode(root *tree.BTNode, k int) *tree.BTNode {
 	if root == nil {
-		return math.MinInt64, k
+		return nil
 	}
 	if k == 0 {
-		return root.Data.(int), k
+		return root
+	} else {
+		if root.Left != nil {
+			if k == root.Left.Size {
+				return root
+			} else if k < root.Left.Size {
+				return GetKthNode(root.Left, k-1)
+			} else {
+				return GetKthNode(root.Right, k-1-root.Left.Size)
+			}
+		} else {
+			return GetKthNode(root.Right, k-1)
+		}
 	}
-	k--
-	left, k := getKthNode(root.Left, k)
-	if left != math.MinInt64 {
-		return left, k
-	}
-	right, k := getKthNode(root.Right, k)
-	if right != math.MinInt64 {
-		return right, k
-	}
-	return math.MinInt64, k
 }
